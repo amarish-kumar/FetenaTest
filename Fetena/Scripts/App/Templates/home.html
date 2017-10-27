@@ -1,0 +1,32 @@
+﻿<div>
+    <form class="form-inline well well-sm clearfix">
+        <span class="glyphicon glyphicon-search"></span>
+        <input type="text"
+               placeholder="Search..."
+               class="form-control"
+               ng-model="vm.search"/>
+        <a ui-sref="results" class="btn btn-primary pull-right left-margin">Results</a>
+        <a ui-sref="categories" class="btn btn-primary pull-right left-margin">Categories</a>
+        <a ui-sref="languages" class="btn btn-primary pull-right left-margin">Languages</a>
+        <a ui-sref="quizzes" class="btn btn-primary pull-right left-margin">Quizzes</a>
+    </form>
+
+    <div class="row">
+        <div class="col-sm-4" ng-repeat="list in vm.languages | filter:vm.search">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img ng-src="/api/getImages?imageName={{list.language}}"
+                             class="img-rounded img-responsive img-size"/>
+                    </div>
+                    <div class="col-md-6">
+                        <h3><strong>{{list.language}}</strong>
+                        </h3>
+                        <h4>{{list.count}} Questions</h4>
+                        <a ui-sref="quizDetail({language: list.language})" class="btn btn-info pull-right">Take Quiz</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

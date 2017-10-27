@@ -1,0 +1,243 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Titillium+Web:900|Roboto:400,100);
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.img-size {
+    width: 120px;
+    height: 120px;
+}
+
+.left-margin {
+    margin-left: 10px;
+}
+
+.top-margin {
+    margin-top: 25px;
+}
+
+.left-padding {
+    padding-left: 20px;
+}
+
+.input-width {
+    min-width: 100%;
+}
+
+#quiz {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+#quiz h1 {
+    font-weight: 100;
+    font-size: 1.3em;
+    text-transform: uppercase;
+}
+
+#quiz h1 span {
+    color: #e95420;
+    display: block;
+    font-weight: 900;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 1.8em;
+    line-height: 35px;
+}
+#quiz h2 {
+    color: #772953;
+     font-size: 3em;
+     margin: 0px;
+     font-weight: 100;
+}
+#quiz h3{
+    color: #772953;
+    font-size: 2.4em;
+    margin: 0px;
+    font-weight: 100;
+
+}
+#quiz p { margin: 0px 0px 14px 0px; }
+
+/* progress */
+.fa-check {
+    color: green;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.fa-times {
+    color: red;
+    margin-right: 10px;
+    margin-left: 20px;
+
+}
+
+
+/* intro */
+#quiz .intro {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+#quiz .intro p {
+     margin: 0px 0px 40px 0px;
+}
+
+
+/* question */
+#quiz .question {
+     font-weight: 400;
+    margin-top: 25px;
+
+}
+
+#quiz .question .question-text {
+     font-size: 1.5em;
+     margin: 0px 0px 20px 0px;
+}
+#quiz .question .possible-answer {
+    font-size: 1.3em;
+    border: 1.5px solid rgba(233, 84, 32, .4);
+    border-radius: 6px;
+    padding: 10px;
+    margin: 0px 15px 15px 0px;
+    position: relative;
+}
+
+#quiz .question .possible-answer.selected { border-color: red;}
+#quiz .question .possible-answer.correct { border-color: green;}
+
+#quiz .question .possible-answer::after {
+    content: '';display: block;width: 20px;height: 20px;
+    background: no-repeat 0px 0px; background-size: 20px 20px;
+    position: absolute;top: 5px;right: 5px;
+}
+
+#quiz .question .possible-answer.selected::after {
+    content: "\f00d";font-family: FontAwesome;color: red;
+}
+
+#quiz .question .possible-answer.correct::after {
+    content: "\f00c";font-family: FontAwesome;color: green;
+}
+
+#quiz .question.unanswered .possible-answer { cursor: pointer; }
+#quiz .question.unanswered .possible-answer:hover { background-color: rgba(233, 84, 32, .9); }
+#quiz .question.answered .possible-answer { cursor: default; }
+
+/* feedback */
+#quiz .feedback { color: #772953;margin-top: 50px; transition: opacity 1.5s, margin-top 1.5s;
+    visibility: hidden; opacity: 0;
+}
+#quiz .feedback .continue { margin-top: 5px; }
+#quiz .feedback strong { color: #772953; }
+
+#quiz .answered .feedback { visibility: visible; opacity: 1; margin-top: 10px; }
+
+
+
+/* Animate ng-show */
+
+.ng-hide-add         { animation:0.5s slideInLeft ease-in-out; }
+
+.ng-hide-remove      { animation:0.5s slideInRight ease-in-out; }
+
+/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
+
+@-webkit-keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Override bootstrap */
+.navbar .navbar-brand {
+    font-weight: 900;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 2.8em;
+    text-transform: uppercase;
+}
+
+.well {
+    color: #772953;
+    border: 1px solid #772953;
+    background-color: #fff;
+}
+
+.table {
+   border: 1px #772953;
+}
+
+
+

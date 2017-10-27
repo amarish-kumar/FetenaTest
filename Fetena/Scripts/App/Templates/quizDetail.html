@@ -1,0 +1,81 @@
+﻿<div id="quiz">
+    <h1>
+        <span> {{vm.language}}</span> Questions
+    </h1>
+    <div class="progress-indicator row" ng-show="vm.showProgress">
+        <h4 class="col-sm-2">
+            <strong>Level</strong>: {{vm.level.name === "" ? "All" : vm.level.name}}
+        </h4>
+        <h4 class="col-sm-3">
+            <strong>Category:</strong> {{vm.category.name === "" ? "All" : vm.category.name}}
+        </h4>
+        <h4 class="col-sm-3">
+            <strong>Progress:</strong>
+            {{vm.numberOfAnsweredQuestions}} of
+            {{vm.totalQuestions}} questions
+        </h4>
+        <h4 class="col-sm-4">
+            <strong>Result:</strong>
+            <i class="fa fa-check"></i>{{vm.numberOfCorrectAnswers}}
+            <i class="fa fa-times"></i>{{vm.numberOfIncorrectAnswers}}
+        </h4>
+
+    </div>
+    <div class="intro" ng-show="vm.activeQuestion === -1">
+        <h2>Welcome</h2>
+        <p>If you want to filter the quiz, select level and/or category from the dropdown menus</p>
+        <form>
+            <div class="form-group">
+                <label class="control-label" for="level">Level</label>
+                <select type="text"
+                        class="form-control"
+                        ng-model="vm.level.name"
+                        ng-change="vm.getCategories()"
+                        ng-options="item.level as item.level for item in vm.levels"
+                        id="level"
+                        name="level">
+                    <option value="">All</option>
+                </select>
+                <label class="control-label" for="level">Category</label>
+                <select type="text"
+                        class="form-control"
+                        ng-model="vm.category.name"
+                        ng-options="item.category as item.category for item in vm.categories"
+                        id="category"
+                        name="category">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" ng-click="vm.startQuiz(vm.level)">Start</button>
+        </form>
+    </div>
+    <div class="question
+         {{ vm.questionState === 'answered' ? 'answered' : 'unanswered' }} "
+         ng-show="$index === vm.activeQuestion"
+         ng-repeat="quiz in vm.quizzes">
+        <p class="question-text col-sm-12">{{quiz.question}}</p>
+        <p class="possible-answer col-sm-12"
+           ng-class="{selected:vm.isSelected($index), correct:vm.isCorrect($index)}"
+           ng-repeat="choice in vm.quizzes[$index].choices"
+           ng-click="vm.selectAnswer(quiz, $index)">
+            {{choice.possibleAnswer}}
+        </p>
+        <div class="feedback col-sm-12">
+            <p>{{ quiz.feedback }}</p>
+            <button class="btn btn-primary continue" ng-click="vm.nextQuestion()">Continue</button>
+        </div>
+    </div>
+    <div ng-if="vm.counter > vm.numberOfAnsweredQuestions" class="top-margin col-sm-12">
+        <p>
+            You have successfully completed {{vm.language}} questions of
+            {{vm.level.name === "" ? "All" : vm.level.name}} level and
+            {{vm.category.name === "" ? "All" : vm.category.name}} category.
+        </p>
+        <p>
+            To view the details of your score click the result details button.
+        </p>
+        <a ui-sref="resultDetail({language: vm.language})" class="btn btn-primary">Result Details</a>
+    </div>
+</div>
+
+

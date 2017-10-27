@@ -1,0 +1,25 @@
+﻿<div>
+    <div class="modal-header">
+        <h2>{{vm.title}}</h2>
+    </div>
+
+    <div class="modal-body">
+        <form role="form" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="inputName">Language Name :</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           ng-model="vm.editableItem.name"
+                           ng-required="true"
+                           id="inputName"
+                           placeholder="Language name" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="vm.save()">Save</button>
+        <button class="btn btn-info" ng-click="vm.cancel()">Cancel</button>
+    </div>
+</div>

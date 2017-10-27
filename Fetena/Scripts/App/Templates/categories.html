@@ -1,0 +1,55 @@
+﻿<div>
+
+    <form class="form-inline well well-sm clearfix">
+        <span class="glyphicon glyphicon-search"></span>
+        <input type="text"
+               placeholder="Search..."
+               class="form-control"
+               ng-model="vm.search"/>
+        <button ng-click="vm.editCategory()" class="btn btn-primary pull-right" uib-tooltip="Click here to add category" tooltip-placement="left">
+            <span class="glyphicon glyphicon-plus"></span> Add Category
+        </button>
+    </form>
+
+    <div>
+        <h3>Categories List</h3>
+    </div>
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+
+            <th>Edit</th>
+            <th>Category</th>
+            <th class="left-margin">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="list in vm.filteredCategories | filter: vm.search">
+            <td class="col-sm-2">
+                <button type="submit" class="btn btn-info" ng-click="vm.editCategory(list)"
+                        uib-tooltip="Click here to edit category" tooltip-placement="left">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                </button>
+            </td>
+
+            <td class="col-sm-10">
+                {{list.name}}
+            </td>
+
+            <td class="col-sm-1">
+                <button type="submit" class="btn btn-danger pull-right" ng-click="vm.removeCategory(list.id)"
+                        uib-tooltip="Click here to remove category" tooltip-placement="right">
+                    <span class="glyphicon glyphicon-trash"></span> Delete
+                </button>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <uib-pagination ng-model="vm.currentPage.num"
+                    ng-change="vm.getCategories()"
+                    total-items="vm.categories.length"
+                    max-size="vm.maxSize"
+                    boundary-links="true">
+    </uib-pagination>
+</div>

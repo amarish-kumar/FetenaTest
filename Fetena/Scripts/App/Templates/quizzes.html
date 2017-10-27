@@ -1,0 +1,103 @@
+﻿<div class="top-margin">
+    <form>
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label class="control-label">Programming Language</label>
+                <select type="text"
+                        class="form-control input-width"
+                        ng-model="vm.language"
+                        ng-change="vm.getLevels()"
+                        ng-options="item.language as item.language for item in vm.languages | filter:$viewValue | limitTo:5">
+                    <option value="">Select Programming Language</option>
+                </select>
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label class="control-label">Level</label>
+                <select type="text"
+                        class="form-control input-width"
+                        ng-model="vm.level"
+                        ng-change="vm.getCategories()"
+                        ng-options="item.level as item.level for item in vm.levels | filter:$viewValue | limitTo:5">
+                    <option value="">Select Skill Level</option>
+                </select>
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label class="control-label">Category</label>
+                <select type="text"
+                        class="form-control input-width"
+                        placeholder="Type 1st letter and select from dropdown"
+                        ng-model="vm.category"
+                        ng-options="item.category as item.category for item in vm.categories | filter:$viewValue | limitTo:5">
+                    <option value="">Select Programming Category</option>
+                </select>
+            </div>
+            <div class="col-sm-1 top-margin">
+                <button ng-click="vm.activateQuizzes()" class="btn btn-primary">Get Quizzes</button>
+            </div>
+        </div>
+    </form>
+</div>
+<button ng-click="vm.editQuiz()" class="btn btn-primary top-margin" uib-tooltip="Click here to add category" tooltip-placement="left">
+    <span class="glyphicon glyphicon-plus"></span> Add Quiz
+</button>
+<div ng-show="vm.isQuizListShowing">
+
+    <form class="form-inline well well-sm clearfix top-margin">
+        <span class="glyphicon glyphicon-search"></span>
+        <input type="text"
+               placeholder="Search..."
+               class="form-control"
+               ng-model="vm.search" />
+    </form>
+
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th>Edit</th>
+            <th>Language</th>
+            <th>Level</th>
+            <th>Category</th>
+            <th>Question</th>
+            <th class="left-margin">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="list in vm.filteredQuizzes | filter: vm.search">
+            <td class="col-sm-1">
+                <button type="submit" class="btn btn-info" ng-click="vm.editQuiz(list, $index)"
+                        uib-tooltip="Click here to edit quiz" tooltip-placement="left">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                </button>
+            </td>
+
+            <td class="col-sm-1">
+                {{list.language.name}}
+            </td>
+            <td class="col-sm-1">
+                {{list.level.name}}
+            </td>
+            <td class="col-sm-2">
+                {{list.category.name}}
+            </td>
+            <td class="col-sm-4">
+                {{list.question}}
+            </td>
+            <td class="col-sm-1">
+                <button type="submit" class="btn btn-danger pull-right" ng-click="vm.removeQuiz(list.id)"
+                        uib-tooltip="Click here to remove quiz" tooltip-placement="right">
+                    <span class="glyphicon glyphicon-trash"></span> Delete
+                </button>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <uib-pagination ng-model="vm.currentPage.num"
+                    ng-change="vm.getQuizzes()"
+                    total-items="vm.quizzes.length"
+                    max-size="vm.maxSize"
+                    boundary-links="true">
+    </uib-pagination>
+</div>
